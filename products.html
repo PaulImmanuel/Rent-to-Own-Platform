@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+        function goToProductDetails(productName, rentPrice) {
+            // Store product details in localStorage
+            localStorage.setItem('productName', productName);
+            localStorage.setItem('rentPrice', rentPrice);
+
+            // Redirect to product-details.html
+            window.location.href = 'product-details.html';
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -14,48 +24,52 @@
             <li><a href="signup.html">Sign Up</a></li>
             <li><a href="products.html">Products</a></li>
             <li><a href="about.html">About Us</a></li>
+            <li><a href="help.html">Help</a></li>
         </ul>
     </nav>
 
     <section class="products">
         <h2>Products</h2>
+
         <div class="category">
             <h3>Shoes</h3>
             <div class="gallery">
-                <img src="images/shoe1.jpg" alt="Shoes">
-                <img src="images/shoe2.jpg" alt="Shoes">
-                <img src="images/shoe3.jpg" alt="Shoes">
-                <img src="images/shoe4.jpg" alt="Shoes">
-                <img src="images/shoe5.jpg" alt="Shoes">
-                <img src="images/shoe6.jpg" alt="Shoes">
-                <img src="images/shoe7.jpg" alt="Shoes">
+                <img src="images/shoe1.jpg" alt="Shoe 1" onclick="goToProductDetails('Shoe 1', 100)">
+                <img src="images/shoe2.jpg" alt="Shoe 2" onclick="goToProductDetails('Shoe 2', 150)">
+                <img src="images/shoe3.jpg" alt="Shoe 3" onclick="goToProductDetails('Shoe 3', 150)">
+                <img src="images/shoe4.jpg" alt="Shoe 4" onclick="goToProductDetails('Shoe 4', 150)">
+                <img src="images/shoe5.jpg" alt="Shoe 5" onclick="goToProductDetails('Shoe 5', 150)">
+                <img src="images/shoe6.jpg" alt="Shoe 6" onclick="goToProductDetails('Shoe 6', 150)">
+                <img src="images/shoe7.jpg" alt="Shoe 7" onclick="goToProductDetails('Shoe 7', 150)">
             </div>
         </div>
+
         <div class="category">
             <h3>Bags</h3>
             <div class="gallery">
-                <img src="images/bag1.jpg" alt="Bags">
-                <img src="images/bag2.jpg" alt="Bags">
-                <img src="images/bag3.jpg" alt="Bags">
-                <img src="images/bag4.jpg" alt="Bags">
-                <img src="images/bag5.jpg" alt="Bags">
-                <img src="images/bag6.jpg" alt="Bags">
-                <img src="images/bag7.jpg" alt="Bags">
+                <img src="images/bag1.jpg" alt="Bag 1" onclick="goToProductDetails('Bag 1', 80)">
+                <img src="images/bag2.jpg" alt="Bag 2" onclick="goToProductDetails('Bag 2', 120)">
+                <img src="images/bag3.jpg" alt="Bag 3" onclick="goToProductDetails('Bag 3', 120)">
+                <img src="images/bag4.jpg" alt="Bag 4" onclick="goToProductDetails('Bag 4', 120)">
+                <img src="images/bag5.jpg" alt="Bag 5" onclick="goToProductDetails('Bag 5', 120)">
+                <img src="images/bag6.jpg" alt="Bag 6" onclick="goToProductDetails('Bag 6', 120)">
+                <img src="images/bag7.jpg" alt="Bag 7" onclick="goToProductDetails('Bag 7', 120)">
             </div>
         </div>
-        <div class="category">
-            <h3>Musical Instruments</h3>
-            <div class="gallery">
-                <img src="images/inst1.jpg" alt="Instruments">
-                <img src="images/inst2.jpg" alt="Instruments">
-                <img src="images/inst3.jpg" alt="Instruments">
-                <img src="images/inst4.jpg" alt="Instruments">
-                <img src="images/inst5.jpg" alt="Instruments">
-                <img src="images/inst6.jpg" alt="Instruments">
-                <img src="images/inst7.jpg" alt="Instruments">
 
+        <div class="category">
+            <h3>Instruments</h3>
+            <div class="gallery">
+                <img src="images/inst1.jpg" alt="inst 1" onclick="goToProductDetails('inst 1', 100)">
+                <img src="images/inst2.jpg" alt="inst 2" onclick="goToProductDetails('inst 2', 150)">
+                <img src="images/inst3.jpg" alt="inst 3" onclick="goToProductDetails('inst 3', 150)">
+                <img src="images/inst4.jpg" alt="inst 4" onclick="goToProductDetails('inst 4', 150)">
+                <img src="images/inst5.jpg" alt="inst 5" onclick="goToProductDetails('inst 5', 150)">
+                <img src="images/inst6.jpg" alt="inst 6" onclick="goToProductDetails('inst 6', 150)">
+                <img src="images/inst7.jpg" alt="inst 7" onclick="goToProductDetails('inst 7', 150)">
             </div>
         </div>
+
     </section>
 
     <footer>

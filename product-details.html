@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        function loadProductDetails() {
+            const productName = localStorage.getItem('productName');
+            const rentPrice = localStorage.getItem('rentPrice');
+
+            // Populate the product name and rent price
+            document.getElementById('product-name').innerText = productName;
+            document.getElementById('rent-price').innerText = '₹' + rentPrice + ' per day';
+
+            // Calculate the total rent based on days selected
+            const dateSelector = document.getElementById('rent-days');
+            dateSelector.addEventListener('change', function () {
+                const days = parseInt(dateSelector.value);
+                const totalAmount = days * rentPrice;
+                document.getElementById('total-amount').innerText = '₹' + totalAmount;
+            });
+        }
+
+        function rentNow() {
+            alert('Product rent requested successfully!');
+        }
+
+        window.onload = loadProductDetails;
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+        </nav>
+
+        <section class="product-details">
+            <h2 id="product-name"></h2>
+            <p id="rent-price"></p>
+
+            <form>
+                <label for="rent-days">Select Days:</label>
+                <input type="number" id="rent-days" min="1" value="1" required>
+
+                <p>Total Amount: <span id="total-amount">₹0</span></p>
+
+                <button type="button" onclick="rentNow()">Rent Now</button>
+            </form>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Rental Website. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
