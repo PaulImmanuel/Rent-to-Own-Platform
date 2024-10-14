@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Slider Styles */
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+        </nav>
+
+        <!-- Slider Section -->
+        <div class="slider">
+            <div class="slides">
+                <div class="slide">
+                    <img src="images/slide1.jpg" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="images/slide2.jpg" alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="images/slide3.jpg" alt="Slide 3">
+                </div>
+            </div>
+            <button class="nav-button prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="nav-button next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <section class="main-content">
+            <h2>Welcome to Our Rental Website</h2>
+            <p>Your one-stop shop for renting shoes, bags, and musical instruments!</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Your Website | All rights reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // Slider JavaScript
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            const slides = document.querySelector('.slides');
+            const allSlides = document.querySelectorAll('.slide');
+            if (slideIndex >= allSlides.length) {
+                slideIndex = 0;
+            }
+            if (slideIndex < 0) {
+                slideIndex = allSlides.length - 1;
+            }
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+        }
+
+        function moveSlide(n) {
+            slideIndex += n;
+            showSlides();
+        }
+
+        // Optional: Automatic Slide Change
+        setInterval(() => {
+            slideIndex++;
+            showSlides();
+        }, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+</html>
