@@ -59,6 +59,7 @@ const server = http.createServer(function(req, res) {
           res.end();
         });
     });
+
   } else if (req.url === '/products') {
     serveFile('products.html', res);
   } else if (req.url === '/product-details') {
@@ -67,10 +68,25 @@ const server = http.createServer(function(req, res) {
     serveFile('about.html', res);
   } else if (req.url === '/help') {
     serveFile('help.html', res);
+  } else if (req.url === '/admin') {
+    serveFile('admin.html', res);
   }
+  
     else if (req.url.startsWith('/css/') || req.url.startsWith('/js/') || req.url.startsWith('/images/')) {
     serveStaticFile(req.url, res);
-  } else {
+  } 
+  else if (req.url === '/api/users' && req.method === 'GET') {
+    UserModel.find({})
+      .then(users => {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(users));
+      })
+      .catch(err => {
+        console.error('Error fetching users:', err);
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end('Error fetching users');
+      });
+  }else {
     // Handle 404 - Page not found
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.write('404 Not Found');

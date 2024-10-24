@@ -16,15 +16,35 @@
 
             // Calculate the total rent based on days selected
             const dateSelector = document.getElementById('rent-days');
-            dateSelector.addEventListener('change', function () {
+            dateSelector.addEventListener('input', function () {
                 const days = parseInt(dateSelector.value);
-                const totalAmount = days * rentPrice;
-                document.getElementById('total-amount').innerText = '₹' + totalAmount;
+                if (!isNaN(days) && days > 0 && days <= 730) {
+                    const totalAmount = days * rentPrice;
+                    document.getElementById('total-amount').innerText = '₹' + totalAmount;
+                } else {
+                    document.getElementById('total-amount').innerText = '₹ -';
+                }
             });
         }
 
         function rentNow() {
-            alert('Product rent requested successfully!');
+            const days = parseInt(document.getElementById('rent-days').value);
+            const rentPrice = parseInt(localStorage.getItem('rentPrice'));
+
+            // Validation checks
+            if (isNaN(days) || days < 1 || days > 730) {
+                alert('Please enter a valid number of days for rental (1 to 730 days).');
+                return;
+            }
+
+            const totalAmount = days * rentPrice;
+            if (totalAmount <= 0) {
+                alert('Total amount must be greater than zero.');
+                return;
+            }
+
+            // Proceed with the rent request
+            alert(`Product rent requested successfully for ${days} day(s). Total Amount: ₹${totalAmount}`);
         }
 
         window.onload = loadProductDetails;
@@ -44,16 +64,19 @@
         </nav>
 
         <section class="product-details">
-            <h2 id="product-name"></h2>
-            <p id="rent-price"></p>
+            <h2 id="product-name" class="product-title"></h2>
+            <p id="rent-price" class="rent-price"></p>
+            <div class="image-container">
+                <img src="https://media.istockphoto.com/id/1181590456/vector/shopping-cart-icon.jpg?s=612x612&w=0&k=20&c=pkuknfgytAxSNWHRlhkFaR0mSUz8em4MQ0FVnIMKCxk=" alt="Product Image" class="product-image">
+            </div>
 
-            <form>
+            <form class="rent-form">
                 <label for="rent-days">Select Days:</label>
-                <input type="number" id="rent-days" min="1" value="1" required>
+                <input type="number" id="rent-days" min="1" max="730" step="1" value="1" required>
 
                 <p>Total Amount: <span id="total-amount">₹ -</span></p>
 
-                <button type="button" onclick="rentNow()">Rent Now</button>
+                <button type="button" onclick="rentNow()" class="rent-button">Rent Now</button>
             </form>
         </section>
 
@@ -61,36 +84,5 @@
             <p>&copy; 2024 Rental Website. All rights reserved.</p>
         </footer>
     </div>
-</body>
-</html>
- about.html: <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="/index">Home</a></li>
-            <li><a href="/signin">Sign In</a></li>
-            <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/help">Help</a></li>
-        </ul>
-    </nav>
-    
-
-    <section class="about">
-        <h2>About Us</h2>
-        <p>We provide best rent - to own services through online securely.</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Rental Website. All rights reserved.</p>
-    </footer>
 </body>
 </html>
