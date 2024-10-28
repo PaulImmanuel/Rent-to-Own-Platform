@@ -230,6 +230,50 @@ footer {
     margin-bottom: 20px;
 }
 
+/* About Page Styles */
+.about {
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.about h1 {
+    font-size: 2.5rem;
+    color: #008299;
+    margin-bottom: 20px;
+}
+
+.about h2 {
+    font-size: 2rem;
+    color: #004d99;
+    margin: 20px 0;
+}
+
+.about p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.about ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about ul li {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.about ul li strong {
+    color: #008299;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     nav ul {

@@ -35,6 +35,8 @@
     </nav>
 
     <h1>Admin Panel</h1>
+
+    <!-- Section for Users -->
     <button id="showUsersBtn">Show Users</button>
     <table id="usersTable" style="display:none;">
         <thead>
@@ -42,6 +44,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="usersTableBody">
@@ -54,9 +57,15 @@
     </footer>
 
     <script>
+        // Show Users
         document.getElementById('showUsersBtn').addEventListener('click', function() {
             fetch('/api/users')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
                 .then(users => {
                     const usersTableBody = document.getElementById('usersTableBody');
                     usersTableBody.innerHTML = ''; // Clear previous data
@@ -66,15 +75,27 @@
                             <td>${user.name}</td>
                             <td>${user.email}</td>
                             <td>${user.phone}</td>
+                            <td><button class="deleteUser Btn" data-id="${user._id}">Delete</button></td>
                         `;
                         usersTableBody.appendChild(row);
                     });
                     document.getElementById('usersTable').style.display = 'table'; // Show the table
+
+                    // Add event listeners to delete buttons
+                    document.querySelectorAll('.deleteUser Btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const userId = this.getAttribute('data-id');
+                            deleteUser (userId);
+                        });
+                    });
                 })
                 .catch(error => {
                     console.error('Error fetching users:', error);
                 });
         });
+
+
+
     </script>
 </body>
 </html>

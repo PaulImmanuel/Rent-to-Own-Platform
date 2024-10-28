@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .dashboard-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .recent-rentals {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .recommended-products {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><button class="logout-button" onclick="logout()">Logout</button></li>
+            </ul>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="welcome-section">
+                <h2>Welcome, <span id="userName">User</span>!</h2>
+            </div>
+
+            <div class="recent-rentals">
+                <h3>Your Recent Rentals</h3>
+                <div id="rentalsContainer">
+                    <!-- Rentals will be populated here -->
+                    <p>No recent rentals</p>
+                </div>
+            </div>
+
+<div class="recommended-products">
+    <h3>Recommended Products</h3>
+    <div class="product-grid">
+        <!-- Designer Bag Product Card -->
+        <div class="product-card">
+            <a href="http://localhost:8000/product-details" onclick="goToProductDetails('Designer Bag', 50)">
+                <img src="images/bag1.jpg" alt="Designer Bag">
+                <h4>Designer Bag</h4>
+                <p>$50/day</p>
+            </a>
+        </div>
+        <!-- Luxury Shoes Product Card -->
+        <div class="product-card">
+            <a href="http://localhost:8000/product-details" onclick="goToProductDetails('Luxury Shoes', 30)">
+                <img src="images/shoe1.jpg" alt="Luxury Shoes">
+                <h4>Luxury Shoes</h4>
+                <p>$30/day</p>
+            </a>
+        </div>
+        <!-- Add more product cards as needed -->
+    </div>
+</div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Rental Website | All rights reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // Fetch user data when page loads
+        window.onload = function() {
+            fetchUserData();
+        };
+
+        function fetchUserData() {
+            // In a real application, make an API call to get user data
+            // For now, we'll just use the email from the token
+            fetch('/api/user-data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('userName').textContent = data.name || 'User';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+    function logout() {
+        // Make a request to the logout endpoint
+        fetch('/logout', {
+            method: 'POST',
+            credentials: 'same-origin' // This is important for cookies
+        })
+        .then(() => {
+            // Redirect to signin page
+            window.location.href = '/signin';
+        })
+        .catch(error => {
+            console.error('Logout error:', error);
+            // Redirect anyway
+            window.location.href = '/signin';
+        });
+    }
+    </script>
+</body>
+</html>

@@ -9,11 +9,11 @@
         function loadProductDetails() {
             const productName = localStorage.getItem('productName');
             const rentPrice = localStorage.getItem('rentPrice');
-
+    
             // Populate the product name and rent price
             document.getElementById('product-name').innerText = productName;
             document.getElementById('rent-price').innerText = '₹' + rentPrice + ' per day';
-
+    
             // Calculate the total rent based on days selected
             const dateSelector = document.getElementById('rent-days');
             dateSelector.addEventListener('input', function () {
@@ -26,27 +26,53 @@
                 }
             });
         }
-
+    
         function rentNow() {
             const days = parseInt(document.getElementById('rent-days').value);
             const rentPrice = parseInt(localStorage.getItem('rentPrice'));
-
+            const productName = localStorage.getItem('productName');
+    
             // Validation checks
             if (isNaN(days) || days < 1 || days > 730) {
                 alert('Please enter a valid number of days for rental (1 to 730 days).');
                 return;
             }
-
+    
             const totalAmount = days * rentPrice;
             if (totalAmount <= 0) {
                 alert('Total amount must be greater than zero.');
                 return;
             }
-
+    
             // Proceed with the rent request
-            alert(`Product rent requested successfully for ${days} day(s). Total Amount: ₹${totalAmount}`);
+            const rentData = {
+                productName: productName,
+                rentPrice: rentPrice,
+                days: days,
+                totalAmount: totalAmount
+            };
+    
+            // Send the rent request to the server
+            fetch('/api/rent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': ' application/json'
+                },
+                body: JSON.stringify(rentData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert(`Product rent requested successfully for ${days} day(s). Total Amount: ₹${totalAmount}`);
+                } else {
+                    alert('Error renting the product. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
         }
-
+    
         window.onload = loadProductDetails;
     </script>
 </head>
